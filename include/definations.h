@@ -14,4 +14,3 @@
 #define CONCAT(a, b) a##b
 
 #endif
-

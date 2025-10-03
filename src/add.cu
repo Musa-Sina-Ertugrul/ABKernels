@@ -1,13 +1,11 @@
-#ifndef __ADD__
-#define __ADD__
-
 #include <torch/extension.h>
 #include <cuda_runtime.h>
 #include <cuda_bf16.h>
 #include <cuda_fp16.h>
 #include <c10/cuda/CUDAStream.h>
-#include "../utils/func_defs.cu"
-#include "../utils/definations.cu"
+#include "func_defs.h"
+#include "definations.h"
+#include "add.h"
 
 CREATE_FUNC_INTERMEADIATE_2INPUT(add_bfx2,
         nv_bfloat162* local_left = BFX2_ptr(array_left);
@@ -20,5 +18,3 @@ CREATE_FUNC_INTERMEADIATE_2INPUT(add_fx2,
         FX2_ptr(output)[index] = __hadd2(local_left[index],local_right[index]);, half)
 
 CREATE_CALL_FUNCTION_X2_2INPUT(add)
-
-#endif

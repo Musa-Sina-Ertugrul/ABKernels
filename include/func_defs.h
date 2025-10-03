@@ -1,7 +1,7 @@
 #ifndef __FUNC_DEF__
 #define __FUNC_DEF__
 
-#include "./definations.cu"
+#include "definations.h"
 
 #define CREATE_CALL_FUNCTION_X2_2INPUT(func_name) \
 torch::Tensor \
@@ -55,7 +55,6 @@ func_name(torch::Tensor input){\
 }
 
 #define CREATE_ACTIVATION_FUNC_INNER(func_name,pre_calculation,calculation,dtype) \
-static \
 __device__ \
 __forceinline__ \
 dtype \
@@ -80,12 +79,11 @@ func_name(dtype* array_left, dtype* array_right,dtype* output,uint64_t len){ \
 #define CREATE_FUNC_INTERMEADIATE(func_name,inside,dtype) \
 __global__ \
 void \
-func_name(dtype* input,u_int64_t len){ \
+func_name(dtype* input,uint64_t len){ \
     uint64_t index = blockIdx.x * blockDim.x + threadIdx.x; \
     if (index< len){ \
         inside \
     } \
 }
-
 
 #endif
